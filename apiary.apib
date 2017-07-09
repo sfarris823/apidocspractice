@@ -9,6 +9,8 @@ A to do list item object contains the following attributes:
 + name : string         A textual name for the to do list item.
 + status : integer      Whether the item is complete (1)  or incomplete (0)
 
+# Group Items
+
 ## Items Collection [/items]
 
 ### List All Items [GET]
@@ -49,3 +51,63 @@ This method will create a to do list item on a specific to do list.
             {
                 "itemid": 1001
             }
+
++ Response 500 (application/json)
+
+        {
+            "error": "Could not create to do list item"
+        }
+
+
+### Updating a New Item [PUT]
+
+This method will update a to do list item on a specific to do list.
+
++ Request (application/json)
+
+        {
+            "itemid": 1001,
+            "name": "Buy whole milk",
+            "status": 1
+        }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /items/2
+
+    + Body
+
+            {
+                "itemid": 1001
+            }
+
++ Response 500 (application/json)
+
+        {
+            "error": "Could not create to do list item"
+        }
+
+### Deleting an Item [DELETE]
+
+This method will delete a to do list item on a specific to do list.
+
++ Request (application/json)
+
+        {
+            "itemid": 1001
+        }
+
++ Response 204 (plain text)
+
+    + Headers
+
+            Location: /items/2
+
+
++ Response 500 (application/json)
+
+        {
+            "error": "Could not delete to do list item"
+        }
