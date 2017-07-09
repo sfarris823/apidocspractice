@@ -1,80 +1,51 @@
 FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
-# myAPI
+# Get It Done To Do List
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+A to do list item object contains the following attributes:
++ listid : integer      The identifier of the to do list.  For this early version we only support a single list with listid=0.
++ itemid : integer      The identifier of the to do list item.  This value is unique across the entire application.
++ name : string         A textual name for the to do list item.
++ status : integer      Whether the item is complete (1)  or incomplete (0)
 
-## Questions Collection [/questions]
+## Items Collection [/items]
 
-### List All Questions [GET]
+### List All Items [GET]
+
+The application currently only supports a single to do list, but in 
+the future we will support multiple to do lists, and so this value 
+will become more important later.
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                "listid": 0,
+                "itemid": 1001,
+                "name": "Buy milk",
+                "status": 0
             }
         ]
 
-### Create a New Question [POST]
+### Create a New Item [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+This method will create a to do list item on a specific to do list.
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "name": "Buy milk"
         }
 
 + Response 201 (application/json)
 
     + Headers
 
-            Location: /questions/2
+            Location: /items/2
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "itemid": 1001
             }
